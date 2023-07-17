@@ -138,9 +138,47 @@ foreach (var item in cities1)
 
 City city1 = cities.FirstOrDefault(q => q.Id == 135);
 
-Console.WriteLine(city1.Name);
+if (city1 != null)
+{
+    Console.WriteLine(city1.Name);
+}
 
 //City city1 = cities.First(q => q.Id == 135);
+
+
+
+
+List<Product> products = ProductService.GenerateProductData();
+
+//Ürün fiyatı 50 ile 100 arasında olan ürünleri console a yaz
+var products1 = products.Where(q => q.UnitPrice > 50 && q.UnitPrice < 100).ToList();
+
+foreach (var item in products1)
+{
+   // Console.WriteLine("Name " + item.Name + " Price: " + item.UnitPrice);
+}
+
+//Id si 10 olan ürünün kategorisinin adı nedir?
+Product product = products.FirstOrDefault(q => q.Id == 10);
+Console.WriteLine("Category Name: " + product.Category?.Name);
+
+//Stok değeri 5 in altına düşen ürünlerin adı, stoğu ve ürünün kategorisinin adını ekrana yaz
+
+List<Product> products2 = products.Where(q => q.UnitsInStock < 5).ToList();
+
+foreach (var item in products2)
+{
+    Console.WriteLine("Name: " + item.Name + " Stock: " + item.UnitsInStock + " Category: " + item.Category?.Name);
+}
+
+
+//kategori Id si 5 olan ürünleri listele
+List<Product> products3 = products.Where(q => q.Category?.Id == 5).ToList();
+
+
+
+//Kategori adında hi kelimesi geçen ürünler
+List<Product> products4 = products.Where(q => q.Category.Name.Contains("hi")).ToList();
 
 
 
