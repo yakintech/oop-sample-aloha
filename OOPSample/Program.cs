@@ -81,20 +81,18 @@ Film film = films.FirstOrDefault(q => q.Id == 5);
 Film film2 = films.FirstOrDefault(q => q.Name == "Whiplash");
 
 //7) Puanı en yüksek filmin adını ekrana yazdır
-var film3 = films.OrderByDescending(q => q.Point).Take(2);
+Film film3 = films.OrderByDescending(q => q.Point).Take(1).FirstOrDefault();
 
 //8) Puanı en düşük filmin adını ekrana yazdır
-var film4 = films.OrderByDescending(q => q.Point).Take(1).FirstOrDefault();
+Film film4 = films.OrderByDescending(q => q.Point).Take(1).FirstOrDefault();
 
 //Console.WriteLine("Name :" + film3.Name + "Point: " + film3.Point);
-Console.WriteLine("Name :" + film4.Name + "Point: " + film4.Point);
+//Console.WriteLine("Name :" + film4.Name + "Point: " + film4.Point);
 
 
 
 // Adının içerisinde w harfi geçen film var mı?
 bool hasFilm = films.Any(q => q.Name.Contains('x'));
-Console.Read();
-
 
 
 // WHERE
@@ -104,9 +102,49 @@ Console.Read();
 // FirstOrDefault
 // Any
 
+List<City> cities = CityService.GenerateRandomCities();
+
+// ID si 5 olan şehrin ADI nedir?
+City city = cities.FirstOrDefault(q => q.Id == 5);
+//Console.WriteLine("Name :" + city.Name);
+
+
+// İçerisinde x harfi geçen KAÇ ADET ŞEHİR VAR?
+int count3 = cities.Where(q => q.Name.Contains('x')).Count();
+//Console.WriteLine("Count: " +  count3);
+
+// İki kelimelik şehirleri ekrana yaz. Kansas City gibi...
+List<City> cities1 = cities.Where(q => q.Name.Trim().Contains(' ')).ToList();
+
+foreach (var item in cities1)
+{
+    Console.WriteLine("Name: " + item.Name);
+}
+
+//List<City> cities2 = new List<City>();
+
+//foreach (var item in cities)
+//{
+//    var namesCount = item.Name.Split(' ').Count();
+//    if (namesCount > 1)
+//    {
+//        cities2.Add(item);
+//    }
+//}
+
+
+//ID si 135 olan şehir?
+//first metotdu içerisindeki koşula uygun data bulamazsa exception FIRLATIR firstordefault metodu ise exception FIRLATMAZ ONUN YERİNE NULL BİR DEĞER DÖNER!
+
+City city1 = cities.FirstOrDefault(q => q.Id == 135);
+
+Console.WriteLine(city1.Name);
+
+//City city1 = cities.First(q => q.Id == 135);
 
 
 
+Console.Read();
 
 
 
